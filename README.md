@@ -1,39 +1,173 @@
-# 软件开发实验4
+# 这是一个选择排序测试
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
+![image-20220608200933808](.\1.png)
 
 
-#### 安装教程
+# 这是一个数据分析
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+首先，没安装库的先安装库，依次执行：
+pip install matplotlib
+pip install pandas
+pip install seaborn
+或：
+pip3 install matplolib
+pip3 install pandas
+pip3 install seaborn
 
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+pip适配版本为py2 pip3适配版本为py3
 
 
-#### 特技
+```python
+%matplotlib inline
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+加载数据集
+
+
+```python
+df = pd.read_csv('fortune500.csv')
+```
+
+## 数据表
+
+这是一个表头
+
+![2](.\2.png)
+
+这是一个表尾
+
+![3](.\3.png)
+
+对数据属性列重命名
+
+
+```python
+df.columns = ['year', 'rank', 'company', 'revenue', 'profit'] 
+```
+
+检查数据条目总数
+
+
+```python
+Input: len(df)
+```
+
+
+    Output: 25500
+
+
+
+查看各列属性的数据格式
+
+
+```python
+Input: df.dtypes
+```
+
+
+    Output: 
+    year         int64
+    rank         int64
+    company     object
+    revenue    float64
+    profit      object
+    dtype: object
+
+
+
+检查表中非数值类型的profit
+
+
+```python
+Input:
+non_numberic_profits = df.profit.str.contains('[^0-9.-]')
+df.loc[non_numberic_profits].head()
+```
+
+![4](C:\Users\27472\Desktop\MobileDevelopment-main\4.png)
+
+统计非数值的profit条目数
+
+
+```python
+Input: len(df.profit[non_numberic_profits]) 
+```
+
+
+
+
+    Output: 369
+
+
+
+使用直方图查看![5](.\5.png)
+    
+
+
+删除这些条目
+
+
+```python
+Input: 
+df = df.loc[~non_numberic_profits]
+df.profit = df.profit.apply(pd.to_numeric)
+```
+
+再次统计条目总数
+
+
+```python
+Input: len(df)
+```
+
+
+    Output: 25131
+
+查看各列属性的数据格式
+
+
+
+![6](C:\Users\27472\Desktop\MobileDevelopment-main\6.png)
+
+## 使用matplotlib绘图
+
+定义变量和方法
+
+
+```python
+group_by_year = df.loc[:, ['year', 'revenue', 'profit']].groupby('year')
+avgs = group_by_year.mean()
+x = avgs.index
+y1 = avgs.profit
+def plot(x, y, ax, title, y_label):
+    ax.set_title(title)
+    ax.set_ylabel(y_label)
+    ax.plot(x, y)
+    ax.margins(x=0, y=0)
+```
+
+绘图
+
+![7](.\7.png)    
+
+
+绘制收入曲线
+
+
+
+
+![8](C:\Users\27472\Desktop\MobileDevelopment-main\8.png)
+    
+
+
+对结果进行标准差处理 
+
+
+![9](C:\Users\27472\Desktop\MobileDevelopment-main\9.png)
+    
+
+
+
