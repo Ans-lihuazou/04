@@ -1,7 +1,6 @@
 # 这是一个选择排序测试
 
-![image-20220608200933808](.\1.png)
-
+![image-20220608200933808](1.png)
 
 # 这是一个数据分析
 
@@ -35,11 +34,11 @@ df = pd.read_csv('fortune500.csv')
 
 这是一个表头
 
-![2](.\2.png)
+![2](2.png)
 
 这是一个表尾
 
-![3](.\3.png)
+![3](3.png)
 
 对数据属性列重命名
 
@@ -87,7 +86,7 @@ non_numberic_profits = df.profit.str.contains('[^0-9.-]')
 df.loc[non_numberic_profits].head()
 ```
 
-![4](C:\Users\27472\Desktop\MobileDevelopment-main\4.png)
+![4](4.png)
 
 统计非数值的profit条目数
 
@@ -103,7 +102,7 @@ Input: len(df.profit[non_numberic_profits])
 
 
 
-使用直方图查看![5](.\5.png)
+使用直方图查看![5](5.png)
     
 
 
@@ -130,7 +129,7 @@ Input: len(df)
 
 
 
-![6](C:\Users\27472\Desktop\MobileDevelopment-main\6.png)
+![6](6.png)
 
 ## 使用matplotlib绘图
 
@@ -151,7 +150,7 @@ def plot(x, y, ax, title, y_label):
 
 绘图
 
-![7](.\7.png)    
+![7](7.png)    
 
 
 绘制收入曲线
@@ -159,14 +158,14 @@ def plot(x, y, ax, title, y_label):
 
 
 
-![8](C:\Users\27472\Desktop\MobileDevelopment-main\8.png)
+![8](8.png)
     
 
 
 对结果进行标准差处理 
 
 
-![9](C:\Users\27472\Desktop\MobileDevelopment-main\9.png)
+![9](9.png)
     
 
 
